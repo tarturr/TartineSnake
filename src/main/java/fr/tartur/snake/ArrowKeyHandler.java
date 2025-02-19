@@ -1,6 +1,5 @@
 package fr.tartur.snake;
 
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -13,11 +12,11 @@ public class ArrowKeyHandler extends KeyAdapter {
     }
 
     public void keyPressed(KeyEvent event) {
-        final Point orientation = switch (event.getKeyCode()) {
-            case KeyEvent.VK_UP    -> new Point(0, -1);
-            case KeyEvent.VK_DOWN  -> new Point(0,  1);
-            case KeyEvent.VK_LEFT  -> new Point(-1, 0);
-            case KeyEvent.VK_RIGHT -> new Point(1,  0);
+        final Direction orientation = switch (event.getKeyCode()) {
+            case KeyEvent.VK_UP    -> Direction.UP;
+            case KeyEvent.VK_DOWN  -> Direction.DOWN;
+            case KeyEvent.VK_LEFT  -> Direction.LEFT;
+            case KeyEvent.VK_RIGHT -> Direction.RIGHT;
             default -> null;
         };
 
