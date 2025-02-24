@@ -8,7 +8,7 @@ public class Main {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setSize(500, 500);
         window.setLocationRelativeTo(null);
-        window.add(new SnakeGamePanel());
+        window.add(new MenuPanel(window));
         window.setResizable(false);
         window.setVisible(true);
     }

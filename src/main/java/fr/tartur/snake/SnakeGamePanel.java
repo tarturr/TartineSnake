@@ -7,8 +7,8 @@ import java.util.TimerTask;
 
 public class SnakeGamePanel extends JPanel {
 
-	private static final Color DARK_GREEN = Color.getHSBColor(114f / 360f, 0.5f, 0.5f);
-	private static final Color GREEN = Color.getHSBColor(114f / 360f, 0.5f, 0.8f);
+	public static final Color DARK_GREEN = Color.getHSBColor(114f / 360f, 0.5f, 0.5f);
+	public static final Color GREEN = Color.getHSBColor(114f / 360f, 0.5f, 0.8f);
 
 	private final SnakeGame game;
 	private final JLabel label;
