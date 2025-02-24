@@ -7,9 +7,6 @@ import java.util.TimerTask;
 
 public class SnakeGamePanel extends JPanel {
 
-	public static final Color DARK_GREEN = Color.getHSBColor(114f / 360f, 0.5f, 0.5f);
-	public static final Color GREEN = Color.getHSBColor(114f / 360f, 0.5f, 0.8f);
-
 	private final SnakeGame game;
 	private final JLabel label;
 	private final int borderSize;
@@ -46,7 +43,7 @@ public class SnakeGamePanel extends JPanel {
 		final int cellX = this.getCellX(cellWidth, position.x);
 		final int cellY = this.getCellY(cellHeight, position.y);
 
-		Color cellColor = DARK_GREEN;
+		Color cellColor = ColorPalette.DARK_GREEN.get();
 		label.setText("Score actuel : " + game.getScore());
 
 		if (game.isSnakeCell(position)) {
@@ -54,7 +51,7 @@ public class SnakeGamePanel extends JPanel {
 		} else if (game.isAppleCell(position)) {
 			cellColor = Color.RED;
 		} else if ((position.x + position.y) % 2 != 0) {
-			cellColor = GREEN;
+			cellColor = ColorPalette.GREEN.get();
 		}
 
 		g.setColor(cellColor);

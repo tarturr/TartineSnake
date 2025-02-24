@@ -17,7 +17,7 @@ public class MenuPanel extends JPanel {
         title.setAlignmentX(CENTER_ALIGNMENT);
         super.add(title);
 
-        final JButton play = newButton("Jouer", SnakeGamePanel.GREEN);
+        final JButton play = newButton("Jouer", ColorPalette.GREEN.get());
         play.addActionListener(_ -> {
             window.setVisible(false);
             window.remove(this);
@@ -25,7 +25,7 @@ public class MenuPanel extends JPanel {
             window.setVisible(true);
         });
 
-        final JButton quit = newButton("Quitter", SnakeGamePanel.DARK_GREEN);
+        final JButton quit = newButton("Quitter", ColorPalette.DARK_GREEN.get());
         quit.addActionListener(_ -> window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING)));
 
         super.add(play);
