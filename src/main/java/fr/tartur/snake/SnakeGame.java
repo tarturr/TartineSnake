@@ -1,6 +1,8 @@
 package fr.tartur.snake;
 
 import java.awt.*;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Random;
 
 public class SnakeGame {
@@ -9,20 +11,26 @@ public class SnakeGame {
 	private final int lineCount;
 	private final Snake snake;
 	private final Point apple;
+	private final PropertyChangeSupport support;
 
 	private int score;
+	private boolean gameOver;
 
 	public SnakeGame() {
 		this.columnCount = 20;
 		this.lineCount = 20;
-		this.snake = new Snake(new Point(10, 15), Direction.UP);
+		this.snake = new Snake(new Point(10, 15), Direction.LEFT);
 		this.apple = new Point(5, 10);
+		this.support = new PropertyChangeSupport(this);
 
 		this.score = 0;
-	}
+		this.gameOver = false;
+    }
 	
 	public void moveForward() {
-		if (this.isGameOver()) {
+		this.updateGameState();
+
+		if (this.gameOver) {
 			return;
 		}
 		
@@ -61,12 +69,20 @@ public class SnakeGame {
 		return this.apple.equals(position);
 	}
 
-	private boolean isGameOver() {
+	private void updateGameState() {
 		final Point head = this.snake.getHead();
 		final boolean isOutOfColumns = head.x < 0 || head.x >= this.columnCount;
 		final boolean isOutOfLines = head.y < 0 || head.y >= this.lineCount;
 
-		return this.snake.collidesTail(head) || isOutOfColumns || isOutOfLines;
+		this.gameOver = this.snake.collidesTail(head) || isOutOfColumns || isOutOfLines;
+
+		if (this.gameOver) {
+			this.support.firePropertyChange("gameOver", false, true);
+		}
+	}
+
+	public void addGameOverListener(PropertyChangeListener listener) {
+		this.support.addPropertyChangeListener(listener);
 	}
 	
 }

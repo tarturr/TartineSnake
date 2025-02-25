@@ -2,23 +2,37 @@ package fr.tartur.snake;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SnakeGamePanel extends JPanel {
+public class SnakeGamePanel extends JPanel implements PropertyChangeListener {
 
 	private final SnakeGame game;
 	private final JLabel label;
 	private final int borderSize;
+	private final Timer gameScheduler;
+    private final JFrame window;
 
-	public SnakeGamePanel() {
-		this.game = new SnakeGame();
+    public SnakeGamePanel(JFrame window) {
+        this.window = window;
+        this.game = new SnakeGame();
+		this.game.addGameOverListener(this);
 		this.label = new JLabel("Score actuel : " + game.getScore());
 		this.borderSize = 10;
 
 		super.setFocusable(true);
 		super.addKeyListener(new ArrowKeyHandler(this.game));
-		this.startGameScheduler();
+
+		this.gameScheduler = new Timer();
+		this.gameScheduler.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				game.moveForward();
+				repaint();
+			}
+		}, 1000, 200);
 	}
 
 	protected void paintComponent(Graphics graphics) {
@@ -57,16 +71,6 @@ public class SnakeGamePanel extends JPanel {
 		g.setColor(cellColor);
 		g.fillRect(cellX, cellY, cellWidth, cellHeight);
 	}
-
-	private void startGameScheduler() {
-		new Timer().scheduleAtFixedRate(new TimerTask() {
-			@Override
-			public void run() {
-				game.moveForward();
-				repaint();
-			}
-		}, 1000, 200);
-	}
 	
 	private int getBorderSize() {
 		return this.borderSize;
@@ -86,5 +90,17 @@ public class SnakeGamePanel extends JPanel {
 
 	private int getCellY(int cellHeight, int line) {
 		return cellHeight * line + this.getBorderSize();
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event.getPropertyName().equals("gameOver")) {
+			this.gameScheduler.cancel();
+
+			this.window.setVisible(false);
+			this.window.remove(this);
+			this.window.add(new GameOverPanel());
+			this.window.setVisible(true);
+		}
 	}
 }

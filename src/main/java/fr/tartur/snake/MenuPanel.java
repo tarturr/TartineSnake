@@ -18,15 +18,15 @@ public class MenuPanel extends JPanel {
         super.add(title);
 
         final JButton play = newButton("Jouer", ColorPalette.GREEN.get());
-        play.addActionListener(_ -> {
+        play.addActionListener(ignored -> {
             window.setVisible(false);
             window.remove(this);
-            window.add(new SnakeGamePanel());
+            window.add(new SnakeGamePanel(window));
             window.setVisible(true);
         });
 
         final JButton quit = newButton("Quitter", ColorPalette.DARK_GREEN.get());
-        quit.addActionListener(_ -> window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING)));
+        quit.addActionListener(ignored -> window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING)));
 
         super.add(play);
         super.add(quit);
