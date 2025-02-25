@@ -1,5 +1,7 @@
 package fr.tartur.snake;
 
+import fr.tartur.snake.displays.MenuPanel;
+
 import javax.swing.*;
 
 public class Main {

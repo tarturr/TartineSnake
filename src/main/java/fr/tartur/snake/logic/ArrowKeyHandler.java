@@ -1,4 +1,4 @@
-package fr.tartur.snake;
+package fr.tartur.snake.logic;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

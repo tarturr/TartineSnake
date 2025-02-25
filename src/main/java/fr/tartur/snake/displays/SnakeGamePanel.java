@@ -1,4 +1,8 @@
-package fr.tartur.snake;
+package fr.tartur.snake.displays;
+
+import fr.tartur.snake.logic.ArrowKeyHandler;
+import fr.tartur.snake.logic.Snake;
+import fr.tartur.snake.logic.SnakeGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,30 +13,21 @@ import java.util.TimerTask;
 
 public class SnakeGamePanel extends JPanel implements PropertyChangeListener {
 
-	private final SnakeGame game;
 	private final JLabel label;
 	private final int borderSize;
-	private final Timer gameScheduler;
     private final JFrame window;
 
+	private SnakeGame game;
+	private Timer gameScheduler;
+
     public SnakeGamePanel(JFrame window) {
+		this.start();
         this.window = window;
-        this.game = new SnakeGame();
-		this.game.addGameOverListener(this);
 		this.label = new JLabel("Score actuel : " + game.getScore());
 		this.borderSize = 10;
 
 		super.setFocusable(true);
 		super.addKeyListener(new ArrowKeyHandler(this.game));
-
-		this.gameScheduler = new Timer();
-		this.gameScheduler.scheduleAtFixedRate(new TimerTask() {
-			@Override
-			public void run() {
-				game.moveForward();
-				repaint();
-			}
-		}, 1000, 200);
 	}
 
 	protected void paintComponent(Graphics graphics) {
@@ -99,8 +94,22 @@ public class SnakeGamePanel extends JPanel implements PropertyChangeListener {
 
 			this.window.setVisible(false);
 			this.window.remove(this);
-			this.window.add(new GameOverPanel());
+			this.window.add(new GameOverPanel(this.window, this.game.getScore()));
 			this.window.setVisible(true);
 		}
+	}
+
+	public void start() {
+		this.game = new SnakeGame();
+		this.game.addGameOverListener(this);
+
+		this.gameScheduler = new Timer();
+		this.gameScheduler.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				game.moveForward();
+				repaint();
+			}
+		}, 1000, 200);
 	}
 }

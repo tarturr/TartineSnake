@@ -1,4 +1,4 @@
-package fr.tartur.snake;
+package fr.tartur.snake.logic;
 
 import java.awt.*;
 import java.beans.PropertyChangeListener;
