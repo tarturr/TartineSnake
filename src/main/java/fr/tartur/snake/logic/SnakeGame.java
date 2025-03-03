@@ -3,14 +3,13 @@ package fr.tartur.snake.logic;
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.Random;
 
 public class SnakeGame {
 
 	private final int columnCount;
 	private final int lineCount;
 	private final Snake snake;
-	private final Point apple;
+	private final Apple apple;
 	private final PropertyChangeSupport support;
 
 	private int score;
@@ -20,7 +19,7 @@ public class SnakeGame {
 		this.columnCount = 20;
 		this.lineCount = 20;
 		this.snake = new Snake(new Point(10, 15), Direction.LEFT);
-		this.apple = new Point(5, 10);
+		this.apple = new Apple(this.columnCount, this.lineCount);
 		this.support = new PropertyChangeSupport(this);
 
 		this.score = 0;
@@ -35,12 +34,10 @@ public class SnakeGame {
 		}
 		
 		if (this.snake.forward(this.apple)) {
-			Random random = new Random();
-			this.apple.setLocation(
-					random.nextInt(0, this.columnCount),
-					random.nextInt(0, this.lineCount)
-			);
-			
+			do {
+				this.apple.randomize();
+			} while (this.snake.isBody(this.apple));
+
 			++this.score;
 		}
 	}
