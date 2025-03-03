@@ -11,6 +11,7 @@ public class ArrowKeyHandler extends KeyAdapter {
         this.game = game;
     }
 
+    @Override
     public void keyPressed(KeyEvent event) {
         final Direction orientation = switch (event.getKeyCode()) {
             case KeyEvent.VK_UP    -> Direction.UP;
