@@ -2,7 +2,7 @@ package fr.tartur.snake.displays;
 
 import java.awt.*;
 
-public enum ColorPalette {
+public enum Palette {
 
     DARK_GREEN(114f / 360f, 0.5f, 0.5f),
     GREEN(114f / 360f, 0.5f, 0.8f),
@@ -11,11 +11,11 @@ public enum ColorPalette {
 
     private final Color color;
 
-    ColorPalette(float h, float s, float b) {
+    Palette(float h, float s, float b) {
         this.color = Color.getHSBColor(h, s, b);
     }
 
-    public Color get() {
+    public Color getColor() {
         return color;
     }
 

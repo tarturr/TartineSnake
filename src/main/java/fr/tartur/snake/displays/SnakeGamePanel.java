@@ -51,15 +51,15 @@ public class SnakeGamePanel extends JPanel implements PropertyChangeListener {
 		final int cellX = this.getCellX(cellWidth, position.x);
 		final int cellY = this.getCellY(cellHeight, position.y);
 
-		Color cellColor = ColorPalette.DARK_GREEN.get();
+		Color cellColor = Palette.DARK_GREEN.getColor();
 		label.setText("Score actuel : " + game.getScore());
 
 		if (game.isSnakeCell(position)) {
-			cellColor = ColorPalette.SNAKE.get();
+			cellColor = Palette.SNAKE.getColor();
 		} else if (game.isAppleCell(position)) {
 			cellColor = Color.RED;
 		} else if ((position.x + position.y) % 2 != 0) {
-			cellColor = ColorPalette.GREEN.get();
+			cellColor = Palette.GREEN.getColor();
 		}
 
 		g.setColor(cellColor);
