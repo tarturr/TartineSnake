@@ -2,6 +2,7 @@ package fr.tartur.snake.displays;
 
 import fr.tartur.snake.displays.components.PlayButton;
 import fr.tartur.snake.displays.components.QuitButton;
+import fr.tartur.snake.displays.components.TitleLabel;
 import fr.tartur.snake.displays.components.TransparentCenteredPanel;
 
 import javax.swing.*;
@@ -15,21 +16,17 @@ public class GameOverPanel extends JPanel {
         super.setBackground(Color.BLACK);
         super.setBorder(new EmptyBorder(50, 50, 50, 50));
 
-        final JLabel gameOver = new JLabel("Vous avez perdu !");
-        gameOver.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-        gameOver.setForeground(Color.WHITE);
-
-        final JLabel scoreDisplay = new JLabel("Score atteint : " + score);
-        scoreDisplay.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
-        scoreDisplay.setForeground(Color.WHITE);
+        final TitleLabel gameOverTitle = new TitleLabel("Vous avez perdu !", 25, Color.WHITE);
+        final TitleLabel scoreTitle = new TitleLabel("Score atteint : " + score, 15, Color.WHITE);
 
         final PlayButton replay = new PlayButton("Réessayer", window, this);
+        final QuitButton quit = new QuitButton(window);
 
         super.add(Box.createVerticalBox());
-        super.add(new TransparentCenteredPanel(gameOver));
-        super.add(new TransparentCenteredPanel(scoreDisplay));
+        super.add(new TransparentCenteredPanel(gameOverTitle));
+        super.add(new TransparentCenteredPanel(scoreTitle));
         super.add(replay);
-        super.add(new QuitButton(window));
+        super.add(quit);
         super.add(Box.createVerticalBox());
     }
 
