@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Snake {
 
-    public static final Color BODY_COLOR = Color.getHSBColor(249f / 360f, 0.7f, 1.0f);
-
     private final List<Point> body;
     private Direction direction;
 
@@ -15,8 +13,8 @@ public class Snake {
         this.body = new ArrayList<>(List.of(
                 initialPosition,
                 new Point(initialPosition.x + 1, initialPosition.y),
-                new Point(initialPosition.x + 2, initialPosition.y))
-        );
+                new Point(initialPosition.x + 2, initialPosition.y)
+        ));
         this.direction = direction;
     }
 

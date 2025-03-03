@@ -1,7 +1,6 @@
 package fr.tartur.snake.displays;
 
 import fr.tartur.snake.logic.ArrowKeyHandler;
-import fr.tartur.snake.logic.Snake;
 import fr.tartur.snake.logic.SnakeGame;
 
 import javax.swing.*;
@@ -56,7 +55,7 @@ public class SnakeGamePanel extends JPanel implements PropertyChangeListener {
 		label.setText("Score actuel : " + game.getScore());
 
 		if (game.isSnakeCell(position)) {
-			cellColor = Snake.BODY_COLOR;
+			cellColor = ColorPalette.SNAKE.get();
 		} else if (game.isAppleCell(position)) {
 			cellColor = Color.RED;
 		} else if ((position.x + position.y) % 2 != 0) {
