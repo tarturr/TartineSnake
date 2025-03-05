@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class GameOverPanel extends JPanel {
 
-    public GameOverPanel(JFrame window, int score) {
+    public GameOverPanel(SceneManager scene, int score) {
         super(new GridLayout(6, 1, 0, 15));
         super.setBackground(Color.BLACK);
         super.setBorder(new EmptyBorder(50, 50, 50, 50));
@@ -19,8 +19,8 @@ public class GameOverPanel extends JPanel {
         final TitleLabel gameOverTitle = new TitleLabel("Vous avez perdu !", 25, Color.WHITE);
         final TitleLabel scoreTitle = new TitleLabel("Score atteint : " + score, 15, Color.WHITE);
 
-        final PlayButton replay = new PlayButton("Réessayer", window, this);
-        final QuitButton quit = new QuitButton(window);
+        final PlayButton replay = new PlayButton("Réessayer", scene, this);
+        final QuitButton quit = new QuitButton(scene);
 
         super.add(Box.createVerticalBox());
         super.add(new TransparentCenteredPanel(gameOverTitle));

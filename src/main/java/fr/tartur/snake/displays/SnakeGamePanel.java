@@ -14,14 +14,14 @@ public class SnakeGamePanel extends JPanel implements PropertyChangeListener {
 
 	private final JLabel label;
 	private final int borderSize;
-    private final JFrame window;
+    private final SceneManager scene;
 
 	private SnakeGame game;
 	private Timer gameScheduler;
 
-    public SnakeGamePanel(JFrame window) {
+    public SnakeGamePanel(SceneManager scene) {
 		this.start();
-        this.window = window;
+        this.scene = scene;
 		this.label = new JLabel("Score actuel : " + game.getScore());
 		this.borderSize = 10;
 
@@ -90,11 +90,7 @@ public class SnakeGamePanel extends JPanel implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getPropertyName().equals("gameOver")) {
 			this.gameScheduler.cancel();
-
-			this.window.setVisible(false);
-			this.window.remove(this);
-			this.window.add(new GameOverPanel(this.window, this.game.getScore()));
-			this.window.setVisible(true);
+			this.scene.switchScene(this, new GameOverPanel(this.scene, this.game.getScore()));
 		}
 	}
 
